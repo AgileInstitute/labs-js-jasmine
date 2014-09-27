@@ -10,7 +10,7 @@ describe("photons", function() {
 
     });
 
-    it ("notifies you when no torpedoes remain", function() {
+    it ("reports when no torpedoes remain", function() {
         // given
         game.t = 0;
         ui.target = new Klingon();
@@ -22,7 +22,7 @@ describe("photons", function() {
         expect(ui.writeLine).toHaveBeenCalledWith("No more photon torpedoes!");
     });
 
-    describe("when drift over distance causes torpedo to miss", function() {
+    describe("when random drift over distance causes torpedo to miss", function() {
         beforeEach(function() {
             var distanceWhereRandomFactorsHoldSway = 3000;
             ui.target = new Klingon(distanceWhereRandomFactorsHoldSway, 200);
@@ -56,33 +56,45 @@ describe("photons", function() {
         });
     });
 
-    it("destroys Klingon", function() {
-        // given
-        var klingon = new Klingon(500, 200);
-        spyOn(klingon, "destroy");
-        ui.target = klingon;
+    describe("when Klingon destroyed", function() {
+        var klingon;
+        beforeEach(function() {
+            klingon = new Klingon(500, 200);
+            spyOn(klingon, "destroy");
+            ui.target = klingon;
 
-        // when
-        game.processCommand(ui);
+            game.processCommand(ui);
+        });
 
-        // then
-        expect(ui.writeLine).toHaveBeenCalledWith("Photons hit Klingon at 500 sectors with 850 units");
-        expect(ui.writeLine).toHaveBeenCalledWith("Klingon destroyed!");
-        expect(game.t).toBe(7);
-        expect(klingon.destroy).toHaveBeenCalled();
+        it("reports Klingon destroyed", function() {
+            expect(ui.writeLine).toHaveBeenCalledWith("Photons hit Klingon at 500 sectors with 850 units");
+            expect(ui.writeLine).toHaveBeenCalledWith("Klingon destroyed!");
+        });
+
+        it("subtracts a torpedo", function() {
+            expect(game.t).toBe(7);
+        });
+
+        it("actually destroys Klingon", function() {
+            expect(klingon.destroy).toHaveBeenCalled();
+        });
     });
 
-    it("damages Klingon", function() {
-        // given
-        ui.target = new Klingon(500, 2000);
+    describe("when Klingon damaged", function() {
+        beforeEach(function() {
+            ui.target = new Klingon(500, 2000);
 
-        // when
-        game.processCommand(ui);
+            game.processCommand(ui);
+        });
 
-        // then
-        expect(ui.writeLine).toHaveBeenCalledWith("Photons hit Klingon at 500 sectors with 850 units");
-        expect(ui.writeLine).toHaveBeenCalledWith("Klingon has 1150 remaining");
-        expect(game.t).toBe(7);
+        it("reports damage", function() {
+            expect(ui.writeLine).toHaveBeenCalledWith("Photons hit Klingon at 500 sectors with 850 units");
+            expect(ui.writeLine).toHaveBeenCalledWith("Klingon has 1150 remaining");
+        });
+
+        it("subtracts a torpedo", function() {
+            expect(game.t).toBe(7);
+        });
     });
 });
 
