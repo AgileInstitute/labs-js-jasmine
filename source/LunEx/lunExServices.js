@@ -2,6 +2,8 @@ LunExServices = function () {
 };
 
 LunExServices.prototype = {
+    // You must *NOT* change anything in this file!
+
     currentPrice: function (symbol) {
         this.pauseToEmulateSendReceive();
         if (this.invisibleHand() > 0.8) {
