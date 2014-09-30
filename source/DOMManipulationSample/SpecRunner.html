@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Jasmine Spec Runner v2.0.2</title>
+
+  <link rel="shortcut icon" type="image/png" href="../../lib/jasmine-2.0.2/jasmine_favicon.png">
+  <link rel="stylesheet" type="text/css" href="../../lib/jasmine-2.0.2/jasmine.css">
+
+  <script type="text/javascript" src="../../lib/jasmine-2.0.2/jasmine.js"></script>
+  <script type="text/javascript" src="../../lib/jasmine-2.0.2/jasmine-html.js"></script>
+  <script type="text/javascript" src="../../lib/jasmine-2.0.2/boot.js"></script>
+
+  <script type="text/javascript" src="../../lib/jquery.js"></script>
+  <script type="text/javascript" src="../../lib/jquery.mockjax.js"></script>
+
+  <!-- include source files here... -->
+  <script type="text/javascript" src="addressForm.js"></script>
+
+  <!-- include spec files here... -->
+  <script type="text/javascript" src="addressForm.test.js"></script>
+
+</head>
+
+<body>
+
+<div id="test-fixture"></div>
+
+<script type="text/plain" id="japaneseAndOtherFixture">
+    <form>
+        <select id="countrySelect" data-placeholder="Choose a Country…">
+            <option value=""></option><!-- the top option is null value. -->
+            <option value="JP">Japan</option>
+            <option value="US">United States</option>
+        </select>
+
+        <fieldset class="new_address_form address_jp">
+        </fieldset>
+
+        <fieldset class="new_address_form address_us">
+        </fieldset>
+    </form>
+</script>
+<script type="text/plain" id="narniaWithNoCustomFieldsetAndDefaultFixture">
+    <form>
+        <select id="countrySelect" data-placeholder="Choose a Country…">
+            <option value=""></option><!-- the top option is null value. -->
+            <option value="US">United States</option>
+            <option value="$$">Narnia</option>
+        </select>
+
+        <fieldset class="new_address_form address_us">
+        </fieldset>
+
+        <fieldset class="new_address_form address_generic">
+        </fieldset>
+    </form>
+</script>
+
+</body>
+</html>
