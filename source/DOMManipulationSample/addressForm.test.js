@@ -1,4 +1,4 @@
-describe("onCountryChange", function() {
+describe("function onCountryChange (which should be called when the drop-down changes)", function() {
     beforeEach(function() {
         this.$fixture = $('#test-fixture');
     });
